@@ -1,6 +1,6 @@
-# Anime.js Claude Skill
+# Anime.js WOW Skill
 
-A comprehensive Claude Code skill for [Anime.js v4](https://animejs.com/) - a lightweight JavaScript animation library with a simple yet powerful API.
+A comprehensive skill for [Anime.js v4](https://animejs.com/) with premium motion-first website guidance, maintained in the fork at https://github.com/inevolin/animejs-wow-skill.
 
 ## Installation
 
@@ -9,7 +9,7 @@ A comprehensive Claude Code skill for [Anime.js v4](https://animejs.com/) - a li
 Install using the [skills CLI](https://skills.sh/docs/cli):
 
 ```bash
-npx skills add bowtiedswan/animejs-skills
+npx skills add inevolin/animejs-wow-skill
 ```
 
 ### Option 2: Curl (one-liner)
@@ -17,24 +17,24 @@ npx skills add bowtiedswan/animejs-skills
 Run this in your terminal:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/BowTiedSwan/animejs-skills/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/inevolin/animejs-wow-skill/main/install.sh | bash
 ```
 
-Auto-detects Claude Code and installs the skill to `~/.claude/skills/animejs/`.
+Auto-detects Claude Code and installs the skill to `~/.claude/skills/animejs-wow-skill/`.
 
 ### Option 3: Manual
 
 Copy the `SKILL.md` and `references/` folder to your Claude skills directory:
 
 ```bash
-mkdir -p ~/.claude/skills/animejs
-cp SKILL.md ~/.claude/skills/animejs/
-cp -r references ~/.claude/skills/animejs/
+mkdir -p ~/.claude/skills/animejs-wow-skill
+cp SKILL.md ~/.claude/skills/animejs-wow-skill/
+cp -r references ~/.claude/skills/animejs-wow-skill/
 ```
 
 ## What This Skill Provides
 
-This skill equips Claude with deep knowledge of the Anime.js v4 animation library, enabling it to:
+This skill equips an AI coding agent with deep knowledge of the Anime.js v4 animation library, enabling it to:
 
 - Write correct, idiomatic anime.js code
 - Create complex animation timelines and sequences
@@ -48,7 +48,7 @@ This skill equips Claude with deep knowledge of the Anime.js v4 animation librar
 ## Skill Contents
 
 ```
-animejs-skills/
+animejs-wow-skill/
 ├── SKILL.md                      # Main skill with overview and quick reference
 └── references/
     ├── api-reference.md          # Complete API documentation

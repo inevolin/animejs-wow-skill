@@ -1,15 +1,20 @@
 ---
-name: animejs
+name: animejs-wow-skill
 description: |
   Comprehensive skill for Anime.js v4 - a fast and flexible JavaScript animation library. 
   This skill should be used when implementing web animations, creating timelines, working with 
-  SVG animations, scroll-based animations, draggable elements, staggered effects, or any 
-  JavaScript-based animation on the web. Triggers on: "anime.js", "animejs", "animate elements", 
-  "CSS animation with JS", "timeline animation", "stagger animation", "SVG morphing", 
-  "motion path", "scroll animation", "draggable", "spring animation", "keyframe animation".
+  SVG animations, scroll-based animations, draggable elements, staggered effects, immersive
+  motion-first websites, or any JavaScript-based animation on the web. Triggers on: "anime.js",
+  "animejs", "animate elements", "CSS animation with JS", "timeline animation",
+  "stagger animation", "SVG morphing", "motion path", "scroll animation", "draggable",
+  "spring animation", "keyframe animation", "animated landing page", "motion-first website",
+  "Awwwards-style animation", "premium web UX", "interactive marketing site".
+metadata:
+  author: Ilja Nevolin
+  repository: https://github.com/inevolin/animejs-wow-skill
 ---
 
-# Anime.js v4 Skill
+# Anime.js WOW Skill
 
 Anime.js is a lightweight JavaScript animation library with a simple yet powerful API. It works with CSS properties, SVG, DOM attributes, and JavaScript Objects.
 
@@ -229,9 +234,11 @@ createDraggable('.draggable', {
 
 ### Function-Based Values
 ```javascript
+import { animate, random } from 'animejs';
+
 animate('.element', {
   translateX: (el, i, total) => i * 50,
-  rotate: (el, i) => anime.random(-180, 180),
+  rotate: () => random(-180, 180),
   delay: (el, i) => i * 100
 });
 ```
@@ -271,6 +278,187 @@ function AnimatedComponent() {
   );
 }
 ```
+
+## Rich UX Website Building
+
+Use Anime.js as the motion system when the task is to build a premium landing page, marketing site,
+portfolio, or other immersive web experience. The bar here is not "add some animation"; it is to
+make motion carry hierarchy, pacing, and interaction quality without sacrificing performance.
+
+### Motion-First Principles
+
+- Motion should explain structure and guide attention, not decorate static layouts.
+- Favor scroll-triggered choreography with `onScroll()` and scoped cleanup over ad hoc observer logic.
+- Treat typography as animated material: line, word, and character reveals should feel deliberate.
+- Prefer SVG, layered DOM, and CSS variables for assets that need to move elegantly.
+- Hover states should feel intentional: lift, parallax, line draw, morph, or spring response.
+- Mobile motion should be simpler: shorter durations, smaller distances, fewer simultaneous effects.
+
+### Website Stack Guidance
+
+For greenfield website builds, prefer React with Next.js App Router and TypeScript. Use client
+components for Anime.js-driven sections, and import only the modules the page needs when bundle size
+matters.
+
+Suggested structure:
+
+```text
+/app
+  /(marketing)
+    page.tsx
+  /components
+    Hero.tsx
+    Nav.tsx
+    AnimatedSection.tsx
+    SVGLogo.tsx
+  /hooks
+    useAnimeScope.ts
+  /lib
+    animeUtils.ts
+    animeScope.ts
+  /sections
+    About.tsx
+    Services.tsx
+    Work.tsx
+    Contact.tsx
+```
+
+### Recommended Anime.js Features For Premium UI
+
+- `createTimeline()` for hero orchestration, section sequencing, and multi-step interactions.
+- `splitText()` for headline, paragraph, and label reveals with accessible cleanup.
+- `onScroll()` for reveals, scrubbed narratives, and timeline synchronisation.
+- `createLayout()` for filters, reordering, modal transitions, and layout-aware motion.
+- `createDrawable()`, `morphTo()`, and `createMotionPath()` for logos, diagrams, and SVG storytelling.
+- `createDraggable()` with `createSpring()` for tactile controls, card stacks, and sliders.
+- WAAPI integration for simple, repetitive transform/opacity motion where offloading helps.
+
+### Premium Site Section Pattern
+
+Use a consistent motion structure across sections:
+
+1. Navigation: logo draw, link stagger, menu open/close timeline.
+2. Hero: text reveal, layered media motion, CTA entrance, subtle background movement.
+3. Narrative sections: one timeline per section, triggered when entering view.
+4. Grid/list sections: staggered card entrances and hover interactions.
+5. Timeline/testimonial sections: line drawing plus progressive reveals.
+6. Footer: restrained link/icon motion, not a second hero.
+
+### Reusable Recipes For Website Work
+
+#### Premium Text Reveal
+
+```javascript
+import { createTimeline, splitText, stagger } from 'animejs';
+
+const title = splitText('.hero-title', {
+  words: true,
+  chars: true,
+  accessible: true,
+});
+
+createTimeline({ defaults: { ease: 'outExpo', duration: 1200 } })
+  .add(title.words, {
+    translateY: ['1.2em', 0],
+    opacity: [0, 1],
+    delay: stagger(60),
+  })
+  .add(title.chars, {
+    filter: ['blur(8px)', 'blur(0px)'],
+    delay: stagger(12),
+    duration: 500,
+  }, '<+150');
+```
+
+#### Scroll-Triggered Section Reveal
+
+```javascript
+import { animate, onScroll } from 'animejs';
+
+animate('.story-panel', {
+  translateY: [80, 0],
+  opacity: [0, 1],
+  ease: 'outCubic',
+  duration: 900,
+  autoplay: onScroll({
+    target: '.story-panel',
+    sync: 0.5,
+  }),
+});
+```
+
+#### SVG Logo Draw
+
+```javascript
+import { animate, createDrawable } from 'animejs';
+
+animate(createDrawable('#logo path'), {
+  draw: ['0 0', '0 1'],
+  ease: 'inOutSine',
+  duration: 1800,
+});
+```
+
+#### Layout Transition For Filtered Grids
+
+```javascript
+import { createLayout } from 'animejs';
+
+const layout = createLayout('.projects-grid', {
+  duration: 700,
+  ease: 'inOutExpo',
+});
+
+layout.record();
+applyProjectFilter();
+layout.animate();
+```
+
+#### React Scope Pattern For Sections
+
+```jsx
+'use client';
+
+import { useEffect, useRef } from 'react';
+import { animate, createScope, stagger } from 'animejs';
+
+export function AnimatedSection() {
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    if (!rootRef.current) return;
+
+    const scope = createScope({ root: rootRef.current }).add(() => {
+      animate('.nav-link', {
+        y: [16, 0],
+        opacity: [0, 1],
+        delay: stagger(80),
+        ease: 'outExpo',
+      });
+    });
+
+    return () => scope.revert();
+  }, []);
+
+  return <section ref={rootRef} />;
+}
+```
+
+### Creative Direction Rules
+
+- Avoid generic stock-photo-first design when the page is meant to feel premium.
+- Prefer assets that can animate well: SVG logos, layered illustrations, isolated foreground subjects,
+  procedural backgrounds, and graphics with clear depth.
+- Ask how each major asset can reveal, draw, morph, parallax, or respond to input before settling on a static placement.
+
+### Delivery Standards For Website Builds
+
+- Respect `prefers-reduced-motion`; disable or simplify all major animation systems when requested.
+- Keep animation setup scoped and reversible with `createScope()` and `revert()`.
+- Prefer transforms and opacity over layout-affecting properties.
+- Reduce stagger counts, distances, and scrub intensity on small screens.
+- Keep animation code reusable instead of scattering ad hoc logic across components.
+- Use Anime.js v4 APIs and imports consistently; avoid legacy v3 patterns unless the codebase already uses them.
 
 ## Bundle Sizes (Minified + Gzipped)
 
