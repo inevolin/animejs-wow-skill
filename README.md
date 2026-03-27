@@ -12,17 +12,7 @@ Install using the [skills CLI](https://skills.sh/docs/cli):
 npx skills add inevolin/animejs-wow-skill
 ```
 
-### Option 2: Curl (one-liner)
-
-Run this in your terminal:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/inevolin/animejs-wow-skill/main/install.sh | bash
-```
-
-Auto-detects Claude Code and installs the skill to `~/.claude/skills/animejs-wow-skill/`.
-
-### Option 3: Manual
+### Option 2: Manual
 
 Copy the `SKILL.md` and `references/` folder to your Claude skills directory:
 
