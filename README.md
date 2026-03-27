@@ -1,6 +1,6 @@
 # Anime.js WOW Skill
 
-A comprehensive skill for [Anime.js v4](https://animejs.com/) with premium motion-first website guidance, maintained in the fork at https://github.com/inevolin/animejs-wow-skill.
+A 10x WOW skill for [Anime.js v4](https://animejs.com/) with premium motion-first website guidance.
 
 ## Installation
 
